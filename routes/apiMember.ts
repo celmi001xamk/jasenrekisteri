@@ -22,6 +22,7 @@ apiMemberRouter.get("/", async (req: express.Request, res: express.Response) => 
         let data : Member[] = await prisma.member.findMany();
         res.json(data);
     } catch (e: any) {
+        res.json({error: e});
         console.log(e);
     }
 });
@@ -39,6 +40,7 @@ apiMemberRouter.post("/", async (req: express.Request, res: express.Response) =>
         });
         res.json(await prisma.member.findMany());
     } catch (e : any) {
+        res.json({error: e});
         console.log(e)
     }
 });
@@ -69,6 +71,7 @@ apiMemberRouter.put("/:id", async (req: express.Request, res: express.Response) 
         })
         res.json(await prisma.member.findMany());
     } catch (e : any) {
+        res.json({error: e});
         console.log(e)
     }
 });
@@ -82,6 +85,7 @@ apiMemberRouter.delete("/:id", async (req: express.Request, res: express.Respons
         });
         res.json(await prisma.member.findMany());
     } catch (e : any) {
+        res.json({error: e});
         console.log(e)
     }
 });
