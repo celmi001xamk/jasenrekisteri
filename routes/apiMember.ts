@@ -72,3 +72,16 @@ apiMemberRouter.put("/:id", async (req: express.Request, res: express.Response) 
         console.log(e)
     }
 });
+
+apiMemberRouter.delete("/:id", async (req: express.Request, res: express.Response) => {
+    try {
+        await prisma.member.delete({
+            where: {
+                id: Number(req.params.id)
+            }
+        });
+        res.json(await prisma.member.findMany());
+    } catch (e : any) {
+        console.log(e)
+    }
+});
