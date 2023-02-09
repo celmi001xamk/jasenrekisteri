@@ -9,9 +9,26 @@ apiMemberRouter.use(express.json());
 
 apiMemberRouter.get("/", async (req: express.Request, res: express.Response) => {
     try {
-        let data = await prisma.member.findMany();        
+        let data = await prisma.member.findMany();
         res.json(data);
     } catch (e: any) {
         console.log(e);
     }
-})
+});
+
+apiMemberRouter.post("/", async (req: express.Request, res: express.Response) => {
+    try {
+        await prisma.member.create({
+            data: {
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                email: req.body.email,
+                phone: req.body.phone,
+                active: req.body.active
+            }
+        });
+        res.json(await prisma.member.findMany());
+    } catch (e : any) {
+        console.log(e)
+    }
+});
