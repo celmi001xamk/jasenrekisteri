@@ -6,12 +6,15 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { MemberProvider } from './context/MemberContext';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <BrowserRouter>
+            <MemberProvider>
+                <App />
+            </MemberProvider>
+        </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root')
 );

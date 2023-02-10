@@ -1,37 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TableContainer, Table, TableRow, TableCell, TableHead, TableBody, Paper } from "@mui/material"
 import { Member } from "../interfaces/interfaces"
+import { MemberContext } from '../context/MemberContext';
+
 export const Frontpage: React.FC = (): React.ReactElement => {
 
-    const testUsers: Member[] = [
-        {
-            "id": 1,
-            "lastname": "Tester",
-            "firstname": "Timo",
-            "email": "timo@tester.fi",
-            "phone": "1234567890",
-            "signedUpDate": new Date("2023-02-08T15:35:16.834Z"),
-            "active": false
-        },
-        {
-            "id": 2,
-            "lastname": "Kakola",
-            "firstname": "Kaarle",
-            "email": "kaarle.kakola@email.fi",
-            "phone": "0401111111",
-            "signedUpDate": new Date("2023-02-08T15:35:52.811Z"),
-            "active": false
-        },
-        {
-            "id": 3,
-            "lastname": "Jansson",
-            "firstname": "Timo",
-            "email": "herkkuruoka@nalka.fi",
-            "phone": "0100100123",
-            "signedUpDate": new Date("2023-02-08T15:36:58.888Z"),
-            "active": false
-        }
-    ]
+    const { members } = useContext(MemberContext);
 
     return (
         <TableContainer component={Paper}>
@@ -44,21 +18,21 @@ export const Frontpage: React.FC = (): React.ReactElement => {
                         <TableCell>Email</TableCell>
                         <TableCell>Puhelin</TableCell>
                         <TableCell>Liittynyt</TableCell>
-                        <TableCell  align="right">Aktiivinen</TableCell>
+                        <TableCell align="right">Aktiivinen</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {testUsers.map((row, idx) => (
+                    {members.map((member: Member) => (
                         <TableRow
-                            key={idx}
-                        >                            
-                            <TableCell>{row.id}</TableCell>
-                            <TableCell>{row.firstname}</TableCell>
-                            <TableCell>{row.lastname}</TableCell>
-                            <TableCell>{row.email}</TableCell>
-                            <TableCell>{row.phone}</TableCell>
-                            <TableCell>{new Date(row.signedUpDate).toLocaleDateString("FI-fi")}</TableCell>
-                            <TableCell align="right">{(row.active) ? "Kyllä" : "Ei"}</TableCell>
+                            key={member.id}
+                        >
+                            <TableCell>{member.id}</TableCell>
+                            <TableCell>{member.firstname}</TableCell>
+                            <TableCell>{member.lastname}</TableCell>
+                            <TableCell>{member.email}</TableCell>
+                            <TableCell>{member.phone}</TableCell>
+                            <TableCell>{new Date(member.signedUpDate).toLocaleDateString("FI-fi")}</TableCell>
+                            <TableCell align="right">{(member.active) ? "Kyllä" : "Ei"}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
