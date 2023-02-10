@@ -2,21 +2,30 @@ import React from 'react';
 import { Container, Typography } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import { Frontpage } from '../src/components/Frontpage';
+import { Createpage } from '../src/components/Createpage';
+import { Updatepage } from '../src/components/Updatepage';
+import { Deletepage } from '../src/components/Deletepage';
+import { Navigation } from '../src/components/Navigation'
 
 const App: React.FC = (): React.ReactElement => {
 
-  return (
-    <Container maxWidth="md">
+    return (
+        <Container maxWidth="md">
 
-      <Typography variant="h3" align="center">Mustanaamiokerhon jäsenrekisteri</Typography>
+            <Typography variant="h4" align="center" sx={{padding: 2}}>Mustanaamiokerhon jäsenrekisteri</Typography>
 
-      <Routes>
-        <Route path="/" element={<Frontpage />} />
-      </Routes>
+            <Navigation/>
+
+            <Routes>
+                <Route path="/" element={<Frontpage />} />
+                <Route path="/create" element={<Createpage />} />
+                <Route path="/update" element={<Updatepage />} />
+                <Route path="/delete" element={<Deletepage />} />
+            </Routes>
 
 
-    </Container>
-  );
+        </Container>
+    );
 }
 
 export default App;
