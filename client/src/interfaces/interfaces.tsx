@@ -7,3 +7,8 @@ export interface Member {
     signedUpDate: Date,
     active: boolean
 }
+
+export interface MemberDialog {
+    active: boolean,
+    memberIndex: number
+}
