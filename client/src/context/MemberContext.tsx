@@ -18,6 +18,27 @@ export const MemberProvider: React.FC<Props> = (props: Props): React.ReactElemen
         setMembers(data);
     }
 
+    const addMember = async (member: Member) => {
+        console.log(member.active, typeof member.active)
+        const connection = await fetch("api/member", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                firstname: member.firstname,
+                lastname: member.lastname,
+                email: member.email,
+                phone: member.phone,
+                active: member.active
+            })
+        });
+        if (connection.ok) {
+            const data = await connection.json()
+            setMembers(data)
+        }
+    }    
+
     useEffect(() => {
         if (!fetched.current) fetchMembers();
 
@@ -27,7 +48,8 @@ export const MemberProvider: React.FC<Props> = (props: Props): React.ReactElemen
     return (
         <MemberContext.Provider value={{
             members,
-            setMembers
+            setMembers,
+            addMember
         }}>
             {props.children}
         </MemberContext.Provider>
