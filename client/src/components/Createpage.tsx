@@ -9,7 +9,6 @@ import { Member } from '../interfaces/interfaces'
 
 export const Createpage: React.FC = (): React.ReactElement => {
 
-
     const { addMember } = useContext(MemberContext);
     const navigate: NavigateFunction = useNavigate();
     const formRef = useRef<HTMLFormElement>();
