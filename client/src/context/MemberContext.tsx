@@ -58,6 +58,16 @@ export const MemberProvider: React.FC<Props> = (props: Props): React.ReactElemen
         }
     }
 
+    const deleteMember = async (member: Member) => {
+        const connection = await fetch(`api/member/${member.id}`, {
+            method: "DELETE"
+        });
+        if (connection.ok) {
+            const data = await connection.json()
+            setMembers(data)
+        }
+    }
+
     useEffect(() => {
         if (!fetched.current) fetchMembers();
 
@@ -69,7 +79,8 @@ export const MemberProvider: React.FC<Props> = (props: Props): React.ReactElemen
             members,
             setMembers,
             addMember,
-            updateMember
+            updateMember,
+            deleteMember
         }}>
             {props.children}
         </MemberContext.Provider>
