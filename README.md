@@ -1,7 +1,7 @@
 # so3_jasenrekisteri
 Sovellusohjelmointi 3 kurssin korotustehtävä
 
-## 
+## Sovelluksen tarkoitus ja toteutus
 Yksinkertainen sovellus Mustanaamio-fanikerhon jäsenrekisterin ylläpitoon.
 Sovellus sisältää CRUD-toiminnallisuudet.
 
