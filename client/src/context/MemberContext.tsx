@@ -19,7 +19,6 @@ export const MemberProvider: React.FC<Props> = (props: Props): React.ReactElemen
     }
 
     const addMember = async (member: Member) => {
-        console.log(member.active, typeof member.active)
         const connection = await fetch("api/member", {
             method: "POST",
             headers: {
@@ -39,6 +38,26 @@ export const MemberProvider: React.FC<Props> = (props: Props): React.ReactElemen
         }
     }    
 
+    const updateMember = async (member: Member) => {
+        const connection = await fetch(`api/member/${member.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                firstname: member.firstname,
+                lastname: member.lastname,
+                email: member.email,
+                phone: member.phone,
+                active: member.active
+            })
+        });
+        if (connection.ok) {
+            const data = await connection.json()
+            setMembers(data)
+        }
+    }
+
     useEffect(() => {
         if (!fetched.current) fetchMembers();
 
@@ -49,7 +68,8 @@ export const MemberProvider: React.FC<Props> = (props: Props): React.ReactElemen
         <MemberContext.Provider value={{
             members,
             setMembers,
-            addMember
+            addMember,
+            updateMember
         }}>
             {props.children}
         </MemberContext.Provider>
