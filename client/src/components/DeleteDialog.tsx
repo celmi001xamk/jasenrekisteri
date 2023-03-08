@@ -14,7 +14,6 @@ export const DeleteDialog: React.FC = (): React.ReactElement => {
     }
 
     return (
-        <>
             <Dialog open={deleteDialog.active} onClose={() => setDeleteDialog({ active: false, memberIndex: 0 })}>
                 {deleteDialog.active
                     ? <Box
@@ -36,6 +35,5 @@ export const DeleteDialog: React.FC = (): React.ReactElement => {
                     : null
                 }
             </Dialog>
-        </>
     )
 }
