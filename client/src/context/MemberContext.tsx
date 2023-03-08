@@ -1,6 +1,8 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
 import { Member } from '../interfaces/interfaces'
 
+import { MemberDialog } from "../interfaces/interfaces"
+
 export const MemberContext: React.Context<any> = createContext(undefined);
 
 interface Props {
@@ -11,6 +13,8 @@ export const MemberProvider: React.FC<Props> = (props: Props): React.ReactElemen
     const fetched: React.MutableRefObject<boolean> = useRef(false);
 
     const [members, setMembers] = useState<Member[]>([])
+    const [deleteDialog, setDeleteDialog] = useState<MemberDialog>({ active: false, memberIndex: 0 });
+    const [updateDialog, setUpdateDialog] = useState<MemberDialog>({ active: false, memberIndex: 0 });
 
     const fetchMembers = async () => {
         const connection = await fetch("api/member");
@@ -36,7 +40,7 @@ export const MemberProvider: React.FC<Props> = (props: Props): React.ReactElemen
             const data = await connection.json()
             setMembers(data)
         }
-    }    
+    }
 
     const updateMember = async (member: Member) => {
         const connection = await fetch(`api/member/${member.id}`, {
@@ -80,7 +84,11 @@ export const MemberProvider: React.FC<Props> = (props: Props): React.ReactElemen
             setMembers,
             addMember,
             updateMember,
-            deleteMember
+            deleteMember,
+            deleteDialog,
+            setDeleteDialog,
+            updateDialog,
+            setUpdateDialog
         }}>
             {props.children}
         </MemberContext.Provider>
